@@ -5,7 +5,9 @@ pipeline {
         GITHUB_REPO_URL = 'https://github.com/rahul09123/SPE-Mini-Project.git'
         DOCKER_HUB_USERNAME = 'rahul0129'
     }
-
+    tools{
+        maven 'Maven-3'
+    }
     stages {
         stage('Clone Git') {
             steps {

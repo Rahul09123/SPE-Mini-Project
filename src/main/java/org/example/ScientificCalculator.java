@@ -14,7 +14,7 @@ public class ScientificCalculator {
             displayMenu();
             int choice = getChoice();
             
-            if (choice == 6) {
+            if (choice == 5) {
                 System.out.println("Exiting calculator. Goodbye!");
                 break;
             }
