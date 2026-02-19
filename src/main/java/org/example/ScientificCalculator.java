@@ -15,7 +15,7 @@ public class ScientificCalculator {
             int choice = getChoice();
             
             if (choice == 5) {
-                System.out.println("Exiting calculator. Goodbye!");
+                System.out.println("Exiting calculator. Goodbye!!!");
                 break;
             }
             
