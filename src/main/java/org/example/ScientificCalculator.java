@@ -14,7 +14,7 @@ public class ScientificCalculator {
             displayMenu();
             int choice = getChoice();
             
-            if (choice == 5) {
+            if (choice == 9) {
                 System.out.println("Exiting calculator. Goodbye!!!");
                 break;
             }
@@ -27,19 +27,23 @@ public class ScientificCalculator {
 
     private void displayMenu() {
         System.out.println("=== Scientific Calculator ===");
-        System.out.println("1. Square Root (√x)");
-        System.out.println("2. Factorial (x!)");
-        System.out.println("3. Natural Logarithm (ln(x))");
-        System.out.println("4. Power (x^b)");
-        System.out.println("5. Exit");
-        System.out.print("Enter your choice (1-5): ");
+        System.out.println("1. Addition (+)");
+        System.out.println("2. Subtraction (-)");
+        System.out.println("3. Multiplication (*)");
+        System.out.println("4. Division (/)");
+        System.out.println("5. Square Root (√x)");
+        System.out.println("6. Factorial (x!)");
+        System.out.println("7. Natural Logarithm (ln(x))");
+        System.out.println("8. Power (x^b)");
+        System.out.println("9. Exit");
+        System.out.print("Enter your choice (1-9): ");
     }
 
     private int getChoice() {
         try {
             int choice = scanner.nextInt();
-            if (choice < 1 || choice > 5) {
-                System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+            if (choice < 1 || choice > 9) {
+                System.out.println("Invalid choice. Please enter a number between 1 and 9.");
                 return getChoice();
             }
             return choice;
@@ -53,19 +57,91 @@ public class ScientificCalculator {
     private void processChoice(int choice) {
         switch (choice) {
             case 1:
-                calculateSquareRoot();
+                calculateAddition();
                 break;
             case 2:
-                calculateFactorial();
+                calculateSubtraction();
                 break;
             case 3:
-                calculateNaturalLogarithm();
+                calculateMultiplication();
                 break;
             case 4:
+                calculateDivision();
+                break;
+            case 5:
+                calculateSquareRoot();
+                break;
+            case 6:
+                calculateFactorial();
+                break;
+            case 7:
+                calculateNaturalLogarithm();
+                break;
+            case 8:
                 calculatePower();
                 break;
             default:
                 System.out.println("Invalid choice.");
+        }
+    }
+
+    private void calculateAddition() {
+        System.out.print("Enter first number: ");
+        try {
+            double num1 = scanner.nextDouble();
+            System.out.print("Enter second number: ");
+            double num2 = scanner.nextDouble();
+            double result = num1 + num2;
+            System.out.printf("%.4f + %.4f = %.4f%n", num1, num2, result);
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter valid numbers.");
+            scanner.nextLine(); // Clear the invalid input
+        }
+    }
+
+    private void calculateSubtraction() {
+        System.out.print("Enter first number: ");
+        try {
+            double num1 = scanner.nextDouble();
+            System.out.print("Enter second number: ");
+            double num2 = scanner.nextDouble();
+            double result = num1 - num2;
+            System.out.printf("%.4f - %.4f = %.4f%n", num1, num2, result);
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter valid numbers.");
+            scanner.nextLine(); // Clear the invalid input
+        }
+    }
+
+    private void calculateMultiplication() {
+        System.out.print("Enter first number: ");
+        try {
+            double num1 = scanner.nextDouble();
+            System.out.print("Enter second number: ");
+            double num2 = scanner.nextDouble();
+            double result = num1 * num2;
+            System.out.printf("%.4f * %.4f = %.4f%n", num1, num2, result);
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter valid numbers.");
+            scanner.nextLine(); // Clear the invalid input
+        }
+    }
+
+    private void calculateDivision() {
+        System.out.print("Enter numerator: ");
+        try {
+            double num1 = scanner.nextDouble();
+            System.out.print("Enter denominator: ");
+            double num2 = scanner.nextDouble();
+            if (num2 == 0) {
+                System.out.println("Error: Division by zero is not allowed.");
+            } else {
+                double result = num1 / num2;
+                System.out.printf("%.4f / %.4f = %.4f%n", num1, num2, result);
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter valid numbers.");
+            scanner.nextLine(); // Clear the invalid input
         }
     }
 

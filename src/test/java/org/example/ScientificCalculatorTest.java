@@ -141,6 +141,163 @@ public class ScientificCalculatorTest {
         assertEquals(0.25, result, 0.0001);
     }
     
+    @Test
+    void testAdditionPositiveNumbers() {
+        double result = 5.0 + 3.0;
+        assertEquals(8.0, result, 0.0001);
+    }
+    
+    @Test
+    void testAdditionNegativeNumbers() {
+        double result = -5.0 + -3.0;
+        assertEquals(-8.0, result, 0.0001);
+    }
+    
+    @Test
+    void testAdditionMixedNumbers() {
+        double result = 10.0 + -3.0;
+        assertEquals(7.0, result, 0.0001);
+    }
+    
+    @Test
+    void testAdditionWithZero() {
+        double result = 5.0 + 0.0;
+        assertEquals(5.0, result, 0.0001);
+    }
+    
+    @Test
+    void testAdditionDecimalNumbers() {
+        double result = 2.5 + 3.7;
+        assertEquals(6.2, result, 0.0001);
+    }
+    
+    @Test
+    void testSubtractionPositiveNumbers() {
+        double result = 10.0 - 3.0;
+        assertEquals(7.0, result, 0.0001);
+    }
+    
+    @Test
+    void testSubtractionNegativeNumbers() {
+        double result = -5.0 - -3.0;
+        assertEquals(-2.0, result, 0.0001);
+    }
+    
+    @Test
+    void testSubtractionMixedNumbers() {
+        double result = 5.0 - -3.0;
+        assertEquals(8.0, result, 0.0001);
+    }
+    
+    @Test
+    void testSubtractionWithZero() {
+        double result = 5.0 - 0.0;
+        assertEquals(5.0, result, 0.0001);
+    }
+    
+    @Test
+    void testSubtractionDecimalNumbers() {
+        double result = 5.7 - 2.3;
+        assertEquals(3.4, result, 0.0001);
+    }
+    
+    @Test
+    void testMultiplicationPositiveNumbers() {
+        double result = 4.0 * 3.0;
+        assertEquals(12.0, result, 0.0001);
+    }
+    
+    @Test
+    void testMultiplicationNegativeNumbers() {
+        double result = -4.0 * -3.0;
+        assertEquals(12.0, result, 0.0001);
+    }
+    
+    @Test
+    void testMultiplicationMixedNumbers() {
+        double result = -4.0 * 3.0;
+        assertEquals(-12.0, result, 0.0001);
+    }
+    
+    @Test
+    void testMultiplicationWithZero() {
+        double result = 5.0 * 0.0;
+        assertEquals(0.0, result, 0.0001);
+    }
+    
+    @Test
+    void testMultiplicationDecimalNumbers() {
+        double result = 2.5 * 4.0;
+        assertEquals(10.0, result, 0.0001);
+    }
+    
+    @Test
+    void testDivisionPositiveNumbers() {
+        double result = 12.0 / 3.0;
+        assertEquals(4.0, result, 0.0001);
+    }
+    
+    @Test
+    void testDivisionNegativeNumbers() {
+        double result = -12.0 / -3.0;
+        assertEquals(4.0, result, 0.0001);
+    }
+    
+    @Test
+    void testDivisionMixedNumbers() {
+        double result = -12.0 / 3.0;
+        assertEquals(-4.0, result, 0.0001);
+    }
+    
+    @Test
+    void testDivisionByZero() {
+        // Test that division by zero throws ArithmeticException or returns Infinity
+        double result = 5.0 / 0.0;
+        assertTrue(Double.isInfinite(result));
+    }
+    
+    @Test
+    void testDivisionDecimalNumbers() {
+        double result = 7.5 / 2.5;
+        assertEquals(3.0, result, 0.0001);
+    }
+    
+    @Test
+    void testDivisionResultingInDecimal() {
+        double result = 7.0 / 2.0;
+        assertEquals(3.5, result, 0.0001);
+    }
+    
+    @Test
+    void testDivisionZeroByZero() {
+        double result = 0.0 / 0.0;
+        assertTrue(Double.isNaN(result));
+    }
+    
+    @Test
+    void testAdditionLargeNumbers() {
+        double result = Double.MAX_VALUE * 2.0;
+        assertTrue(Double.isInfinite(result));
+    }
+    
+    @Test
+    void testMultiplicationLargeNumbers() {
+        double result = Double.MAX_VALUE * 2.0;
+        assertTrue(Double.isInfinite(result));
+    }
+    
+    @Test
+    void testSubtractionResultingInNegativeZero() {
+        double result = 0.0 - 0.0;
+        assertEquals(0.0, result, 0.0001);
+    }
+    
+    @Test
+    void testDivisionVerySmallNumbers() {
+        double result = 1.0 / Double.MIN_VALUE;
+        assertTrue(Double.isInfinite(result));
+    }
+    
     // Helper method to test factorial (since the original method is private)
     private long factorial(int n) {
         if (n == 0 || n == 1) {
