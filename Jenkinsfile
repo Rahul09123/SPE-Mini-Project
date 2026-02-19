@@ -4,6 +4,7 @@ pipeline {
         DOCKER_IMAGE_NAME = 'scientific-calculator'
         GITHUB_REPO_URL = 'https://github.com/rahul09123/SPE-Mini-Project.git'
         DOCKER_HUB_USERNAME = 'rahul0129'
+        DOCKER_HOST = "unix:///Users/rahulraman/.docker/run/docker.sock"
     }
     tools{
         maven 'Maven-3'
