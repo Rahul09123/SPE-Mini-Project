@@ -46,13 +46,18 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image to Docker Hub') {
+        stage('Build and Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('', 'dockerhub-creds') {
-                        sh "docker tag ${DOCKER_IMAGE_NAME} ${DOCKER_HUB_USERNAME}/${DOCKER_IMAGE_NAME}:latest"
-                        sh "docker push ${DOCKER_HUB_USERNAME}/${DOCKER_IMAGE_NAME}:latest"
-                    }
+                    sh '''
+                    docker buildx create --use || true
+                    docker buildx inspect --bootstrap
+
+                    docker buildx build \
+                      --platform linux/amd64 \
+                      -t rahul0129/scientific-calculator:latest \
+                      --push .
+                    '''
                 }
             }
         }
