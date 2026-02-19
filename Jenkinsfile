@@ -38,26 +38,18 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    docker.build("${DOCKER_IMAGE_NAME}", '.')
-                }
-            }
-        }
-
         stage('Build and Push Docker Image') {
             steps {
                 script {
-                    sh '''
+                    sh """
                     docker buildx create --use || true
                     docker buildx inspect --bootstrap
 
                     docker buildx build \
-                      --platform linux/amd64 \
-                      -t rahul0129/scientific-calculator:latest \
+                      --platform linux/amd64,linux/arm64 \
+                      -t ${DOCKER_HUB_USERNAME}/${DOCKER_IMAGE_NAME}:latest \
                       --push .
-                    '''
+                    """
                 }
             }
         }
