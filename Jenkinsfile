@@ -59,12 +59,7 @@ pipeline {
 
         stage('Deploy with Ansible') {
             steps {
-                script {
-                    ansiblePlaybook(
-                        playbook: 'deploy.yml',
-                        inventory: 'inventory'
-                    )
-                }
+                sh 'ansible-playbook deploy.yml'
             }
         }
     }
