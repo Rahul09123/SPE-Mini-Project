@@ -60,4 +60,29 @@ pipeline {
             }
         }
     }
+    post {
+            success {
+                emailext (
+                    subject: " Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    body: "Build completed successfully.\n${env.BUILD_URL}",
+                    to: "rahulraman2603@gmail.com"
+                )
+            }
+
+            unstable {
+                emailext (
+                    subject: " UNSTABLE Build: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    body: "Build is unstable.\n${env.BUILD_URL}",
+                    to: "rahulraman2603@gmail.com"
+                )
+            }
+
+            failure {
+                emailext (
+                    subject: " Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    body: "Build failed.\n${env.BUILD_URL}",
+                    to: "rahulraman2603@gmail.com"
+                )
+            }
+        }
 }
