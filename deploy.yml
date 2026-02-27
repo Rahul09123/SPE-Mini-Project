@@ -13,11 +13,11 @@
         name: scientific-calculator
         state: absent
 
-    - name: Run new container
+    - name: Run new container in interactive mode
       community.docker.docker_container:
         name: scientific-calculator
         image: rahul0129/scientific-calculator:latest
         state: started
-        restart_policy: always
-        ports:
-          - "8080:8080"
+        interactive: true
+        tty: true
+        stdin_open: true
