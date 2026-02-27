@@ -2,6 +2,11 @@
 - name: Deploy Calculator App with Docker
   hosts: webservers
   tasks:
+    - name: Ensure Docker service is running
+      service:
+          name: docker
+          state: started
+          enabled: yes
     - name: Install Docker
       apt:
         name: docker.io
