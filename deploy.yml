@@ -1,6 +1,6 @@
 ---
 - name: Deploy Calculator App with Docker
-  hosts: webserver
+  hosts: webservers
   tasks:
     - name: Install Docker
       apt:
@@ -23,4 +23,6 @@
         image: rahul0129/scientific-calculator:latest
         state: started
         restart_policy: always
+        ports:
+          - "8080:8080"
         interactive: true

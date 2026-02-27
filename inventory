@@ -1,6 +1,3 @@
-# Ansible inventory file for deployment
-# This file defines the target servers for deployment
-
 [webservers]
 # Production servers
 server1.example.com ansible_user=deploy ansible_ssh_private_key_file=~/.ssh/deploy_key
