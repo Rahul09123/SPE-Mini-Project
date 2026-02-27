@@ -1,23 +1,14 @@
 ---
 - name: Deploy Calculator App with Docker
   hosts: webservers
-  tasks:
-    - name: Ensure Docker service is running
-      service:
-          name: docker
-          state: started
-          enabled: yes
-    - name: Install Docker
-      apt:
-        name: docker.io
-        state: present
 
+  tasks:
     - name: Pull the latest Docker image
       community.docker.docker_image:
         name: rahul0129/scientific-calculator:latest
         source: pull
 
-    - name: Stop and remove existing container (if any)
+    - name: Stop and remove existing container
       community.docker.docker_container:
         name: scientific-calculator
         state: absent
@@ -30,4 +21,3 @@
         restart_policy: always
         ports:
           - "8080:8080"
-        interactive: true
