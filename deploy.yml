@@ -18,17 +18,3 @@
     - name: Display container status
       shell: docker ps -f "name=calculator"
       register: container_status
-
-    - name: Show how to interact with the container
-      debug:
-        msg: |
-          Container deployed successfully!
-          
-          To interact with the calculator, use:
-          
-          OPTION 1 (Recommended):
-          docker exec -it calculator bash
-          # Then run: java -jar app.jar
-          
-          OPTION 2 (Direct attach):
-          docker attach calculator
