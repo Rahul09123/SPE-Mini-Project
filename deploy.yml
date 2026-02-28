@@ -13,10 +13,10 @@
         name: scientific-calculator
         state: absent
 
-    - name: Run new container
+    - name: Run calculator container
       community.docker.docker_container:
         name: calculator
         image: rahul0129/scientific-calculator:latest
+        state: started
         interactive: true
         tty: true
-        state: started
