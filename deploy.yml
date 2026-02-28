@@ -10,13 +10,25 @@
 
     - name: Stop and remove existing container
       community.docker.docker_container:
-        name: scientific-calculator
+        name: calculator
         state: absent
 
-    - name: Run calculator container
+    - name: Run calculator container (detached)
       community.docker.docker_container:
         name: calculator
         image: rahul0129/scientific-calculator:latest
         state: started
-        interactive: true
-        tty: true
+        detach: true
+        restart_policy: unless-stopped
+
+    - name: Display container status
+      shell: docker ps -f "name=calculator"
+      register: container_status
+
+    - name: Show how to interact with the container
+      debug:
+        msg: |
+          Container deployed successfully!
+          To interact with the calculator:
+          - Run: docker attach calculator
+          - Or: docker exec -it calculator bash
