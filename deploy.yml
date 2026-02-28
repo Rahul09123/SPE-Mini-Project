@@ -17,8 +17,6 @@
       community.docker.docker_container:
         name: calculator
         image: rahul0129/scientific-calculator:latest
+        interactive: true
+        tty: true
         state: started
-        detach: true
-        restart_policy: always
-        published_ports:
-          - "8080:8080"
