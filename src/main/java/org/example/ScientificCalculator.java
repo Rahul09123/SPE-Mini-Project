@@ -40,17 +40,37 @@ public class ScientificCalculator {
     }
 
     private int getChoice() {
-        try {
-            int choice = scanner.nextInt();
-            if (choice < 1 || choice > 9) {
-                System.out.println("Invalid choice. Please enter a number between 1 and 9.");
-                return getChoice();
+        while (true) {
+            try {
+                if (!scanner.hasNextInt()) {
+                    if (!scanner.hasNext()) {
+                        // No input stream available (like in Docker without -it)
+                        System.out.println("No input available. Waiting...");
+                        try {
+                            Thread.sleep(20000);
+                        } catch (InterruptedException e) {
+                            return 9; // exit safely
+                        }
+                        continue;
+                    }
+
+                    System.out.println("Invalid input. Please enter a number.");
+                    scanner.next(); // clear invalid token
+                    continue;
+                }
+
+                int choice = scanner.nextInt();
+
+                if (choice < 1 || choice > 9) {
+                    System.out.println("Invalid choice. Please enter 1-9.");
+                    continue;
+                }
+
+                return choice;
+
+            } catch (Exception e) {
+                System.out.println("Unexpected error. Retrying...");
             }
-            return choice;
-        } catch (Exception e) {
-            System.out.println("Invalid input. Please enter a number.");
-            scanner.nextLine(); // Clear the invalid input
-            return getChoice();
         }
     }
 
