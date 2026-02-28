@@ -21,7 +21,6 @@ target/
 *.fls
 *.fdb_latexmk
 *.synctex.gz
-Mini_Project_Report.pdf
 
 ### Mac OS ###
 .DS_Store
