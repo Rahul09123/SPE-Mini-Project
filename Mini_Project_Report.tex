@@ -80,6 +80,36 @@ The Jenkins pipeline automates the complete build, test, and deployment workflow
     \captionof{figure}{Jenkins Pipeline Architecture}
 \end{center}
 
+\subsection{ngrok: Exposing Jenkins to GitHub Webhooks}
+Since Jenkins runs locally on a development machine, it is not directly reachable from the public internet. \textbf{ngrok} is used to create a secure public tunnel to the local Jenkins server, enabling GitHub to send webhook events that automatically trigger pipeline builds on every code push.
+
+\subsubsection{How It Works}
+\begin{enumerate}
+    \item Jenkins is started locally and listens on \texttt{http://localhost:8080}.
+    \item ngrok is launched to forward a public HTTPS URL (e.g., \texttt{https://unfended-unexhibited-jude.ngrok-free.dev}) to that local port.
+    \item The generated ngrok URL is registered as a \textbf{GitHub Webhook} under the repository's \textit{Settings → Webhooks} with the payload URL set to \texttt{https://unfended-unexhibited-jude.ngrok-free.dev/github-webhook/}.
+    \item Whenever a commit is pushed to the \texttt{main} branch, GitHub sends an HTTP POST to that URL.
+    \item ngrok forwards the request to the local Jenkins instance, which triggers the declarative pipeline automatically.
+\end{enumerate}
+
+\subsubsection{Key Benefits in This Project}
+\begin{itemize}
+    \item \textbf{No public server required:} Allows full CI/CD automation from a local machine without needing a cloud-hosted Jenkins instance.
+    \item \textbf{Instant feedback loop:} Every \texttt{git push} triggers the complete pipeline (build → test → containerize → deploy) within seconds.
+    \item \textbf{Secure tunnel:} ngrok provides TLS-encrypted HTTPS endpoints, satisfying GitHub's webhook security requirements.
+    \item \textbf{Zero configuration overhead:} A single \texttt{ngrok http 8080} command establishes the tunnel, keeping the setup lightweight.
+\end{itemize}
+
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{Images/ngrok.png}
+    \captionof{figure}{ngrok Tunnel Exposing Local Jenkins to the Internet}
+\end{center}
+
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{Images/webHook.png}
+    \captionof{figure}{GitHub Webhook Configured with ngrok URL}
+\end{center}
+
 \subsection{Pipeline Stages}
 
 \subsubsection{Stage 1: Clone Git}
@@ -207,6 +237,29 @@ Tests validate: Square Root ($\sqrt{16} = 4$, $\sqrt{0} = 0$), Factorial ($0! = 
 
 \section{Deployment Configuration}
 
+\subsection{Dockerfile}
+The \texttt{Dockerfile} defines the container image used to package and run the Scientific Calculator application.
+
+\begin{lstlisting}[language=bash,caption=Dockerfile]
+FROM openjdk:17.0.1-jdk-slim
+
+WORKDIR /app
+
+COPY target/SPEMiniProject-1.0-SNAPSHOT.jar app.jar
+
+CMD ["/bin/sh"]
+\end{lstlisting}
+
+\subsubsection{Dockerfile Breakdown}
+\begin{itemize}
+    \item \textbf{Base Image (\texttt{FROM openjdk:17.0.1-jdk-slim}):} Uses a lightweight OpenJDK 17 slim image, providing the Java runtime while keeping the image size minimal.
+    \item \textbf{Working Directory (\texttt{WORKDIR /app}):} Sets \texttt{/app} as the working directory inside the container, ensuring all subsequent operations occur in a predictable path.
+    \item \textbf{Copy JAR (\texttt{COPY}):} Copies the Maven-built JAR artifact \texttt{SPEMiniProject-1.0-SNAPSHOT.jar} into the container and renames it to \texttt{app.jar} for simplicity.
+    \item \textbf{Entry Point (\texttt{CMD ["/bin/sh"]}):} Opens an interactive shell on container start, allowing manual execution of the calculator via \texttt{java -jar app.jar} inside the container.
+\end{itemize}
+
+This image is built for multiple platforms (\texttt{linux/amd64} and \texttt{linux/arm64}) using Docker Buildx in the Jenkins pipeline and published to Docker Hub under \texttt{rahul0129/scientific-calculator:latest}.
+
 \subsection{Ansible Deployment Playbook (deploy.yml)}
 The \texttt{deploy.yml} file automates container deployment to target servers using Ansible orchestration.
 
@@ -246,18 +299,10 @@ The Jenkins pipeline executes sequentially through all 6 stages: Clone (fetch co
 
 \textbf{Benefits:} Complete automation, consistency across environments, scalability to multiple servers, high portability across CPU architectures, and rapid feedback (41ms test execution time).
 
-\newpage
 
 \section{Conclusion}
 
 This project successfully demonstrates a complete CI/CD pipeline implementation with 100\% test success (47/47 passing), fast execution (41ms), and multi-platform Docker containerization. The automated pipeline integrates Git-based version control, Maven-based Java builds, comprehensive JUnit 5 testing, multi-platform Docker image building and pushing, and Ansible-based infrastructure deployment. This comprehensive approach showcases modern DevOps practices combining continuous integration, automated testing, and infrastructure-as-code principles.\vspace{0.3cm}
-
-\begin{center}
-    \includegraphics[width=0.5\textwidth]{Images/webHook.png}
-    \captionof{figure}{GitHub WebHook Configuration}
-\end{center}
-
-\vspace{0.2cm}
 
 \begin{center}
     \includegraphics[width=0.5\textwidth]{Images/JUnit.png}
