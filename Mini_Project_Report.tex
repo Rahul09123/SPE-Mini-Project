@@ -61,7 +61,7 @@ This report documents the development and deployment pipeline of a \textbf{Scien
 \textbf{Repository:} \url{https://github.com/rahul09123/SPE-Mini-Project}
 
 \begin{center}
-    \includegraphics[width=0.5\textwidth]{Images/Calculator.png}
+    \includegraphics[width=0.75\textwidth]{Images/Calculator.png}
     \captionof{figure}{Scientific Calculator Application}
 \end{center}
 
@@ -76,7 +76,7 @@ This report documents the development and deployment pipeline of a \textbf{Scien
 The Jenkins pipeline automates the complete build, test, and deployment workflow. It follows a declarative pipeline approach, providing clarity and maintainability.
 
 \begin{center}
-    \includegraphics[width=0.65\textwidth]{Images/JenkinsPipeline.png}
+    \includegraphics[width=0.85\textwidth]{Images/JenkinsPipeline.png}
     \captionof{figure}{Jenkins Pipeline Architecture}
 \end{center}
 
@@ -101,12 +101,12 @@ Since Jenkins runs locally on a development machine, it is not directly reachabl
 \end{itemize}
 
 \begin{center}
-    \includegraphics[width=0.5\textwidth]{Images/ngrok.png}
+    \includegraphics[width=0.75\textwidth]{Images/ngrok.png}
     \captionof{figure}{ngrok Tunnel Exposing Local Jenkins to the Internet}
 \end{center}
 
 \begin{center}
-    \includegraphics[width=0.5\textwidth]{Images/webHook.png}
+    \includegraphics[width=0.75\textwidth]{Images/webHook.png}
     \captionof{figure}{GitHub Webhook Configured with ngrok URL}
 \end{center}
 
@@ -182,7 +182,7 @@ stage('Build and Push Docker Image') {
 \textbf{Purpose:} Builds and pushes multi-platform Docker images (linux/amd64, linux/arm64) to Docker Hub registry.
 
 \begin{center}
-    \includegraphics[width=0.5\textwidth]{Images/DockerHub.png}
+    \includegraphics[width=0.75\textwidth]{Images/DockerHub.png}
     \captionof{figure}{Docker Hub Multi-Platform Build}
 \end{center}
 
@@ -198,7 +198,7 @@ stage('Deploy with Ansible') {
 \textbf{Purpose:} Automates application deployment to target servers using Ansible playbooks.
 
 \begin{center}
-    \includegraphics[width=0.5\textwidth]{Images/container\ Running.png}
+    \includegraphics[width=0.75\textwidth]{Images/container\ Running.png}
     \captionof{figure}{Container Running and Deployed}
 \end{center}
 
@@ -305,14 +305,14 @@ The Jenkins pipeline executes sequentially through all 6 stages: Clone (fetch co
 This project successfully demonstrates a complete CI/CD pipeline implementation with 100\% test success (47/47 passing), fast execution (41ms), and multi-platform Docker containerization. The automated pipeline integrates Git-based version control, Maven-based Java builds, comprehensive JUnit 5 testing, multi-platform Docker image building and pushing, and Ansible-based infrastructure deployment. This comprehensive approach showcases modern DevOps practices combining continuous integration, automated testing, and infrastructure-as-code principles.\vspace{0.3cm}
 
 \begin{center}
-    \includegraphics[width=0.5\textwidth]{Images/JUnit.png}
+    \includegraphics[width=0.75\textwidth]{Images/JUnit.png}
     \captionof{figure}{JUnit Test Results}
 \end{center}
 
 \vspace{0.2cm}
 
 \begin{center}
-    \includegraphics[width=0.5\textwidth]{Images/emailNotification.png}
+    \includegraphics[width=0.75\textwidth]{Images/emailNotification.png}
     \captionof{figure}{Email Notification on Build Status}
 \end{center}
 
