@@ -4,4 +4,4 @@ WORKDIR /app
 
 COPY target/SPEMiniProject-1.0-SNAPSHOT.jar app.jar
 
-CMD ["/bin/sh"]
+CMD ["java -jar app.jar"]
